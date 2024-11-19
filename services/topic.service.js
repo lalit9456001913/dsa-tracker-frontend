@@ -27,7 +27,7 @@ export const getSubTopics = async (token, topicId) => {
     'authorization': token,
   };
   try {
-    const { data: response } = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics`, { headers }); // Assuming topics API is available
+    const { data: response } = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics`, { headers }); 
     return response;
   } catch (error) {
     console.error('Error fetching  subtopics:', error);
@@ -42,7 +42,7 @@ export const getProblems = async (token, topicId, subTopicId) => {
     'authorization': token,
   };
   try {
-    const { data: response } = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics/${subTopicId}/problems`, { headers }); // Assuming topics API is available
+    const { data: response } = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics/${subTopicId}/problems`, { headers }); 
     return response; 
   } catch (error) {
     console.error('Error fetching  subtopics:', error);

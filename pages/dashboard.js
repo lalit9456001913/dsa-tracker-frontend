@@ -7,8 +7,8 @@ import Logout from '../components/Logout';
 
 const Dashboard = ({ topicsData }) => {
     const [topics, setTopics] = useState(topicsData);
-    const [subTopics, setSubTopics] = useState([]);
-    const [problems, setProblems] = useState([]);
+    const [subTopics, setSubTopics] = useState({});
+    const [problems, setProblems] = useState({});
     const [selectedTopicId, setSelectedTopicId] = useState(null);
     const [selectedSubTopicId, setSelectedSubTopicId] = useState(null);
     const auth = getAuth();
@@ -32,14 +32,14 @@ const Dashboard = ({ topicsData }) => {
         setSelectedTopicId(topicId);
         setProblems([]);
         const response = await getSubTopics(token, topicId);
-        setSubTopics(response?.data);
+        setSubTopics((prev) => ({ ...prev, [topicId]: response?.data }));
     };
 
     const handleSubTopicSelect = async (subTopicId) => {
         const token = auth?.token;
         setSelectedSubTopicId(subTopicId);
         const response = await getProblems(token, selectedTopicId, subTopicId);
-        setProblems(response?.data);
+        setProblems((prev) => ({ ...prev, [`${selectedTopicId,subTopicId}`]: response?.data }));
     };
 
     const updateTopicStatus = async (topicId, isChecked) => {

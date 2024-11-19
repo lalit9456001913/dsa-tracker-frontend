@@ -3,15 +3,15 @@ import Accordian from './Accordian';
 import SubTopicsList from './SubTopicList';
 
 
-const TopicsList = ({ topics, onSelectTopic, onSelectSubtopic, subTopics = [], problems = [], updateTopicStatus }) => {
+const TopicsList = ({ topics, onSelectTopic, onSelectSubtopic, subTopics = {}, problems = [], updateTopicStatus }) => {
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Topics</h2>
       <div className="space-y-2">
         {topics.map(topic => (
           <Accordian key={topic._id} isChecked={topic.isCompleted} title={topic.title} onClick={() => onSelectTopic(topic._id)} isShow={true} updateTopicStatus={(isChecked) => updateTopicStatus(topic._id, isChecked)}>
-            {subTopics.length && <SubTopicsList
-              subTopics={subTopics}
+            {subTopics[topic._id]?.length && <SubTopicsList
+              subTopics={subTopics[topic._id]}
               onSelectSubtopic={onSelectSubtopic}
               problems={problems}
             />}
