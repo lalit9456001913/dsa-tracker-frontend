@@ -31,15 +31,18 @@ const Dashboard = ({ topicsData }) => {
         const token = auth?.token;
         setSelectedTopicId(topicId);
         const response = await getSubTopics(token, topicId);
-        
+
         setSubTopics((prev) => ({ ...prev, [topicId]: response?.data }));
     };
 
-    const handleSubTopicSelect = async (subTopicId) => {
+    const handleSubTopicSelect = async (topicId, subTopicId) => {
         const token = auth?.token;
         setSelectedSubTopicId(subTopicId);
-        const response = await getProblems(token, selectedTopicId, subTopicId);
-        setProblems((prev) => ({ ...prev, [`${selectedTopicId,subTopicId}`]: response?.data }));
+        const response = await getProblems(token, topicId, subTopicId);
+        if (response?.status) {
+            setProblems((prev) => ({ ...prev, [`${topicId, subTopicId}`]: response?.data?.data }));
+
+        }
     };
 
     const updateTopicStatus = async (topicId, isChecked) => {
@@ -53,7 +56,7 @@ const Dashboard = ({ topicsData }) => {
     useEffect(() => {
         if (auth?.token) {
             router.push('/dashboard');
-        }else{
+        } else {
             router.push('/login')
         }
     }, []);

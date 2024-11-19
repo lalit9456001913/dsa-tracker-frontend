@@ -11,6 +11,7 @@ const TopicsList = ({ topics, onSelectTopic, onSelectSubtopic, subTopics = {}, p
         {topics.map(topic => (
           <Accordian key={topic._id} isChecked={topic.isCompleted} title={topic.title} onClick={() => onSelectTopic(topic._id)} isShow={true} updateTopicStatus={(isChecked) => updateTopicStatus(topic._id, isChecked)}>
             {subTopics[topic._id]?.length && <SubTopicsList
+              topicId={topic?._id}
               subTopics={subTopics[topic._id]}
               onSelectSubtopic={onSelectSubtopic}
               problems={problems}

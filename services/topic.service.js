@@ -9,7 +9,7 @@ export const getTopics = async (token) => {
   try {
     const response = await axios.get(
       `${ApiUrl}/topics`,
-      { headers } 
+      { headers }
     );
     if (response?.status) {
       return response.data
@@ -27,7 +27,7 @@ export const getSubTopics = async (token, topicId) => {
     'authorization': token,
   };
   try {
-    const { data: response } = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics`, { headers }); 
+    const { data: response } = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics`, { headers });
     return response;
   } catch (error) {
     console.error('Error fetching  subtopics:', error);
@@ -42,8 +42,8 @@ export const getProblems = async (token, topicId, subTopicId) => {
     'authorization': token,
   };
   try {
-    const { data: response } = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics/${subTopicId}/problems`, { headers }); 
-    return response; 
+    const response = await axios.get(`${ApiUrl}/topics/${topicId}/subTopics/${subTopicId}/problems`, { headers });
+    return response;
   } catch (error) {
     console.error('Error fetching  subtopics:', error);
     return { data: [] };
@@ -60,9 +60,9 @@ export const updateTopicProgress = async (token, topicId, isCompleted) => {
     const response = await axios.put(
       `${ApiUrl}/topics/progress/${topicId}`,
       { isCompleted },
-      { headers } 
+      { headers }
     );
-    return response; 
+    return response;
   } catch (error) {
     console.error('Error updating progress:', error);
   }
@@ -71,7 +71,7 @@ export const updateTopicProgress = async (token, topicId, isCompleted) => {
 export const loginUser = async (credentials) => {
   try {
     const response = await api.post(`${ApiUrl}/auth/login`, credentials);
-    return response.data; 
+    return response.data;
   } catch (error) {
     console.error('Error on Login:', error);
   }
