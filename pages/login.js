@@ -8,18 +8,14 @@ function LoginPage() {
     const router = useRouter();
     const [error, setError] = useState('');
     const auth = getAuth();
-    const onSubmit = async (data) => {
-        try {
-            const response = await loginUser(data);
-            if (response?.success) {
-                setAuth(response)
-                router.push('/dashboard');
-            } else {
-                setError(response?.message || 'Login failed. Please check your credentials.');
-            }
-        } catch (err) {
-            console.error('Login error:', err);
-            setError('Something went wrong. Please try again later.');
+
+    const onSubmit = async (credentials) => {
+        const result = await loginUser(credentials);
+        if (result && result.error) {
+            setError(result.error);  
+        } else {
+            setAuth(result); 
+            router.push('/dashboard')
         }
     };
 
