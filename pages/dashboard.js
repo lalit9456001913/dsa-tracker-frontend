@@ -30,8 +30,8 @@ const Dashboard = ({ topicsData }) => {
     const handleTopicSelect = async (topicId) => {
         const token = auth?.token;
         setSelectedTopicId(topicId);
-        setProblems([]);
         const response = await getSubTopics(token, topicId);
+        
         setSubTopics((prev) => ({ ...prev, [topicId]: response?.data }));
     };
 
