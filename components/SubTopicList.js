@@ -13,7 +13,7 @@ const SubTopicsList = ({ subTopics, onSelectSubtopic, problems, topicId }) => {
                         title={subTopic.title}
                         onClick={() => onSelectSubtopic(topicId, subTopic._id)}
                     >
-                        {problems[subTopic._id] && <ProblemsList problems={problems[subTopic._id]} />}
+                        {problems[`${topicId, subTopic._id}`] && <ProblemsList problems={problems[`${topicId, subTopic._id}`]} />}
                     </Accordian>
                 ))}
             </ul>
